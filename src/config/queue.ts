@@ -1,12 +1,12 @@
 import Queue from "bull";
 import logger from "./logger";
+import dotenv from "dotenv";
 
-// Redis connection configuration
-const redisConfig = {
-  host: process.env.REDIS_HOST || "localhost",
-  port: parseInt(process.env.REDIS_PORT || "6379"),
-  password: process.env.REDIS_PASSWORD || undefined,
-};
+dotenv.config();
+
+// Updated Redis connection configuration to match the approach in redis.ts
+const redisUrl =
+  process.env.REDIS_URL || "redis://red-cvv7ccidbo4c73fhcd30:6379";
 
 // Default queue options
 const defaultJobOptions = {
@@ -20,19 +20,19 @@ const defaultJobOptions = {
   removeOnFail: 200, // Keep the last 200 failed jobs
 };
 
-// Create queues
+// Create queues using the Redis URL
 export const postGenerationQueue = new Queue("post-generation", {
-  redis: redisConfig,
+  redis: redisUrl,
   defaultJobOptions,
 });
 
 export const postPublishingQueue = new Queue("post-publishing", {
-  redis: redisConfig,
+  redis: redisUrl,
   defaultJobOptions,
 });
 
 export const wordpressPublishQueue = new Queue("wordpress-publish", {
-  redis: redisConfig,
+  redis: redisUrl,
   defaultJobOptions: {
     ...defaultJobOptions,
     attempts: 5, // More retries for external service calls

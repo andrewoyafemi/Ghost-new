@@ -1,12 +1,11 @@
 // Simple Redis connection test script
 const Redis = require("ioredis");
+require("dotenv").config();
 
-// Create a Redis connection with the same config as your application
-const redis = new Redis({
-  host: process.env.REDIS_HOST || "localhost",
-  port: parseInt(process.env.REDIS_PORT || "6379"),
-  password: process.env.REDIS_PASSWORD,
-});
+// Create a Redis connection with the same config as your application - using URL approach
+const redisUrl =
+  process.env.REDIS_URL || "redis://red-cvv7ccidbo4c73fhcd30:6379";
+const redis = new Redis(redisUrl);
 
 // Log connection events
 redis.on("connect", () => {

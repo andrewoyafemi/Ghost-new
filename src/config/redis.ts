@@ -4,13 +4,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// Create a Redis client
-// const redisClient = new Redis({
-//   host: process.env.REDIS_HOST || "localhost",
-//   port: parseInt(process.env.REDIS_PORT || "6379"),
-//   password: process.env.REDIS_PASSWORD || undefined,
-// });
-
 // FOR RENDER
 const redisClient = new Redis(
   process.env.REDIS_URL || "redis://red-cvv7ccidbo4c73fhcd30:6379"

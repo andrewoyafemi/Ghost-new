@@ -17,18 +17,19 @@ import { postGenerationQueue } from "../config/queue";
 // Import Redlock for distributed locking
 import Redlock from "redlock";
 import Redis from "ioredis";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export class HourlyPostGenerator {
   private redisClient: Redis;
   private redlock: Redlock;
 
   constructor() {
-    // Setup Redis client for distributed locking
-    this.redisClient = new Redis({
-      host: process.env.REDIS_HOST || "localhost",
-      port: parseInt(process.env.REDIS_PORT || "6379"),
-      password: process.env.REDIS_PASSWORD,
-    });
+    // Setup Redis client for distributed locking using the same URL config approach
+    this.redisClient = new Redis(
+      process.env.REDIS_URL || "redis://red-cvv7ccidbo4c73fhcd30:6379"
+    );
 
     // Setup Redlock with the Redis client
     this.redlock = new Redlock([this.redisClient], {
