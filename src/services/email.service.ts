@@ -254,4 +254,21 @@ export class EmailService {
       ...stats,
     });
   }
+
+  /**
+   * Send WordPress credential error notification
+   */
+  public async sendWordPressCredentialError(user: User): Promise<void> {
+    // TODO: Define a new EmailTemplate.WORDPRESS_CREDENTIAL_ERROR
+    // TODO: Create the corresponding template in SendGrid/email-templates.ts
+    const templateType = EmailTemplate.PAYMENT_FAILED; // Placeholder template
+    logger.warn(
+      `Using placeholder template (${templateType}) for WordPress credential error email to ${user.email}`
+    );
+
+    await this.sendEmail(templateType, {
+      name: user.username,
+      settingsUrl: `${process.env.CLIENT_URL}/settings/integrations`,
+    });
+  }
 }

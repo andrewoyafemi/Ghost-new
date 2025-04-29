@@ -204,7 +204,7 @@ export class PostGenerationService {
   /**
    * Generate post content using OpenAI
    */
-  private async generatePostContent(
+  public async generatePostContent(
     businessProfile: BusinessProfile,
     plan: string,
     keywords: string[],
@@ -307,7 +307,7 @@ export class PostGenerationService {
   /**
    * Generate a post title based on content
    */
-  private async generatePostTitle(
+  public async generatePostTitle(
     content: string,
     plan: string
   ): Promise<string> {
@@ -396,7 +396,7 @@ export class PostGenerationService {
   /**
    * Attach keywords to a post
    */
-  private async attachKeywordsToPost(
+  public async attachKeywordsToPost(
     postId: number,
     userId: number,
     keywordStrings: string[],
