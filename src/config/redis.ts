@@ -4,10 +4,17 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// FOR RENDER
+// FOR RENDER (Production)
 const redisClient = new Redis(
   process.env.REDIS_URL || "redis://red-cvv7ccidbo4c73fhcd30:6379"
 );
+
+// For Development
+// const redisClient = new Redis({
+//   host: process.env.REDIS_HOST || "localhost",
+//   port: parseInt(process.env.REDIS_PORT || "6379"),
+//   password: process.env.REDIS_PASSWORD || undefined,
+// });
 
 redisClient.set("ghostryt:status", "active");
 redisClient.get("ghostryt:status").then(console.log);
