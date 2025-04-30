@@ -89,7 +89,7 @@ export class HourlyGeneratePublishJob {
 
   public start(): void {
     // Run at the beginning of every hour
-    const cronExpression = "0 * * * *"; // Minute 21 (user change)
+    const cronExpression = "20 * * * *"; 
     logger.info(
       `Hourly Generate & Publish job scheduled with cron: "${cronExpression}" (UTC)`
     );
