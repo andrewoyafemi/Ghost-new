@@ -59,12 +59,18 @@ export class HourlyGeneratePublishJob {
 
   constructor() {
     // Configure Redis Client (Use existing config pattern)
-    this.redisClient = new Redis({
-      host: process.env.REDIS_HOST || "localhost",
-      port: parseInt(process.env.REDIS_PORT || "6379"),
-      password: process.env.REDIS_PASSWORD,
-      // Add other options like TLS if needed
-    });
+
+    // For Production
+    this.redisClient = new Redis(
+      process.env.REDIS_URL || "redis://red-cvv7ccidbo4c73fhcd30:6379"
+    );
+    // For Development
+    // this.redisClient = new Redis({
+    //   host: process.env.REDIS_HOST || "localhost",
+    //   port: parseInt(process.env.REDIS_PORT || "6379"),
+    //   password: process.env.REDIS_PASSWORD,
+    //   // Add other options like TLS if needed
+    // });
 
     this.redlock = new Redlock([this.redisClient], {
       driftFactor: 0.01,
