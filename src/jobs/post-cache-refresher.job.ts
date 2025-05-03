@@ -29,7 +29,7 @@ export class PostCacheRefresher {
    */
   public start(): void {
     // Run at the start of every 15 min of every hour (minute 0)
-    cron.schedule("3 * * * *", () => {
+    cron.schedule("*/5 * * * *", () => {
       this.refreshPostCache().catch((error) => {
         logger.error("Error refreshing post cache:", error);
       });
