@@ -86,6 +86,10 @@ async function startServer() {
         message: "Welcome to Ghostryt. Congratulations! your API is running!",
       });
     });
+    app.get("/server-time", (req, res) => {
+      res.send({ time: new Date().toISOString() });
+    });
+
     // Start the Express server
     const server = app.listen(PORT, () => {
       logger.info(`Server running on port ${PORT}`);
